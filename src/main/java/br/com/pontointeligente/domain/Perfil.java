@@ -3,16 +3,32 @@ package br.com.pontointeligente.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_perfil",schema = "ponto")
 public class Perfil {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_perfil")
+    @SequenceGenerator(name = "seq_perfil", sequenceName = "seq_perfil", allocationSize = 1)
     @Getter
     private Long id;
-    @Getter
-    @Setter
-    private String nome;
-    @Getter
-    @Setter
-    private String descricao;
 
+    @Getter
+    @Setter
+    @Column(name = "nome", length = 20, nullable = false,unique = true)
+    private String nome;
+
+    @Getter
+    @Setter
+    @Column(name = "descricao",length = 50, nullable = false)
+    private String descricao;
 
 }

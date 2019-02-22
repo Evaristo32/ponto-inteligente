@@ -11,10 +11,12 @@ spring:
     livereload:
       enabled: false # we use gulp + BrowserSync for livereload
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5433/PontoInteligente
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/mma_2
+    username: docker
+    password: docker
   jpa:
+    database: POSTGRESQL
+    show-sql: true
     hibernate:
       ddl-auto: none
     properties:
