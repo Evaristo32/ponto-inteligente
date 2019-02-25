@@ -10,14 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tb_perfil",schema = "ponto")
-public class Perfil {
+public class Perfil implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_perfil")
-    @SequenceGenerator(name = "seq_perfil", sequenceName = "seq_perfil", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ponto.seq_perfil")
+    @SequenceGenerator(name = "ponto.seq_perfil", sequenceName = "ponto.seq_perfil", allocationSize = 1)
     @Getter
     private Long id;
 

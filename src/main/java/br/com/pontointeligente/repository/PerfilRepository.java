@@ -1,4 +1,9 @@
 package br.com.pontointeligente.repository;
 
-public interface PerfilRepository {
+import br.com.pontointeligente.domain.Perfil;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional(readOnly = true)
+public interface PerfilRepository extends JpaRepository<Perfil, Long> {
 }

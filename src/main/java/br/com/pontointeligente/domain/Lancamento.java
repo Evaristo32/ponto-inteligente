@@ -3,6 +3,7 @@ package br.com.pontointeligente.domain;
 import br.com.pontointeligente.enums.TipoLancamentoEnum;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,31 +15,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "tb_lancamento",schema = "ponto")
-public class Lancamento {
+//@ToString
+public class Lancamento implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_lancamento")
-    @SequenceGenerator(name = "seq_lancamento", sequenceName = "seq_lancamento", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ponto.seq_lancamento")
+    @SequenceGenerator(name = "ponto.seq_lancamento", sequenceName = "ponto.seq_lancamento", allocationSize = 1)
     @Getter
     private Long id;
 
     @Getter
     @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dataLancamento", nullable = false)
+    @Column(name = "data_Lancamento", nullable = false)
     private Date dataLancamento;
 
     @Getter
     @Setter
-    @Column(name = "descricaoLancamento", length = 50, nullable = false)
+    @Column(name = "descricao_Lancamento", length = 50, nullable = false)
     private String descricaoLancamento;
 
     @Getter
@@ -49,19 +54,19 @@ public class Lancamento {
     @Getter
     @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dataCriacao", nullable = false)
+    @Column(name = "data_Criacao", nullable = false)
     private Date dataCriacao;
 
     @Getter
     @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dataAtualizacao")
+    @Column(name = "data_Atualizacao")
     private Date dataAtualizacao;
 
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipoLancamentoEnum",nullable = false)
+    @Column(name = "tipo_Lancamento",nullable = false)
     private TipoLancamentoEnum tipoLancamentoEnum;
 
     @Getter
@@ -69,5 +74,18 @@ public class Lancamento {
     @ManyToOne
     @JoinColumn(name = "codigo_funcionario")
     private Funcionario funcionario;
+
+
+    @PreUpdate
+    public void preUpdate(){
+        this.dataAtualizacao = new Date();
+    }
+
+    @PrePersist
+    public void prePersist(){
+        final Date dateAtual = new Date();
+        this.dataCriacao = dateAtual;
+        this.dataAtualizacao =  dateAtual;
+    }
 
 }

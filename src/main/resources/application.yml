@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: dev
+    include: swagger
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: false # we use gulp + BrowserSync for livereload
+  datasource:
+    url: jdbc:postgresql://localhost:5435/ponto_oficial
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.show_sql: true
+      hibernate.use_sql_comments: true
+      hibernate.format_sql: true
+      hibernate.type: trace
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  flyway:
+    enabled: true
