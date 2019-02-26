@@ -28,11 +28,13 @@ public class EmpresaServiceImpl implements EmpresaService {
 
    @Override
    public EmpresaDTO cadastrarEmpresa(Empresa empresa) {
+      logger.info("Iniciando o cadastro da empresa do CNPJ  "+ empresa.getCnpj() );
       return empresaMapper.empresaToEmpresaDto(empresaRepository.save(empresa));
    }
 
    @Override
    public EmpresaDTO buscarEmpresaPorCodigo(Long id) {
+      logger.info("Iniciando a consulta da empresa com id  "+ id );
       Optional<Empresa> empresaConsultada = empresaRepository.findById(id);
       if(empresaConsultada.isPresent()){
          return empresaMapper.empresaToEmpresaDto(empresaConsultada.get());
@@ -43,7 +45,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 
    @Override
    public void deleteEmpresaPorID(Long id) {
-
+      logger.info("Iniciando proceso de exclusão  "+ id );
+      empresaRepository.deleteById(id);
    }
 
    @Override

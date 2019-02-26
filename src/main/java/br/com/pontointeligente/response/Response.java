@@ -6,10 +6,11 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Response<T> {
 
-    @Setter
     @Getter
+    @Setter
     private T data;
 
     private List<String> erros;
