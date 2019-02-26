@@ -38,4 +38,13 @@ public interface EmpresaService {
      */
     EmpresaDTO alterarEmpresa(Empresa empresa);
 
+    /**
+     * O método e responsável por validar se a empresa já esta cadastrada
+     * na base de dados.
+     *
+     * @param cnpj
+     * @return
+     */
+    Boolean isEmpresaCadastrada(String cnpj);
+
 }

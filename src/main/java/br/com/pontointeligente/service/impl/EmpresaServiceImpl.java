@@ -50,4 +50,9 @@ public class EmpresaServiceImpl implements EmpresaService {
    public EmpresaDTO alterarEmpresa(Empresa empresa) {
       return empresaMapper.empresaToEmpresaDto(empresaRepository.save(empresa));
    }
+
+   @Override
+   public Boolean isEmpresaCadastrada(String cnpj) {
+      return empresaRepository.isEmpresaCadastrada(cnpj).isPresent();
+   }
 }

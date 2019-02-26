@@ -39,4 +39,22 @@ public interface FuncionarioService {
      */
     FuncionarioDTO alterarFuncionario(Funcionario funcionario);
 
+    /**
+     * O método e responsável por validar se o Funcionário já se encontra
+     * cadastrado na base de  dados.
+     *
+     * @param cpf
+     * @return
+     */
+    Boolean isFuncionarioCadastrado(String cpf);
+
+    /**
+     * O método e responsável por validar se o email já se encontra cadastrado
+     * na base de  dados.
+     *
+     * @param email
+     * @return
+     */
+    Boolean isEmailCadastrado(String email);
+
 }

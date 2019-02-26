@@ -8,15 +8,15 @@ spring:
     livereload:
       enabled: false # we use gulp + BrowserSync for livereload
   datasource:
-    url: jdbc:postgresql://localhost:5432/ponto_oficial
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5435/ponto
+    username: ponto
+    password: ponto
     driver-class-name: org.postgresql.Driver
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate.show_sql: true
       hibernate.use_sql_comments: true
