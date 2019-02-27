@@ -2,7 +2,7 @@ package br.com.pontointeligente.swagger.config;
 
 public abstract class ConstantSwagger {
 
-    public static final String PACOTE_DAS_CONTROLES = "br.com.pontointeligente.resource";
+    public static final String PACOTE_DAS_CONTROLES = "br.com.pontointeligente.rest";
     public static final String NOME_DA_APLICACAO = "Ponto Inteligente";
     public static final String DESCRICAO_DA_APLICACAO = "O sistema e responsável por controlar o ponto de um funcionario.";
     public static final String VERSAO_DA_APLICACAO = "0.0.1";

@@ -13,6 +13,10 @@ public class Response<T> {
     @Setter
     private T data;
 
+    @Getter
+    @Setter
+    private List<T> datas;
+
     private List<String> erros;
 
     public List<String> getErros() {

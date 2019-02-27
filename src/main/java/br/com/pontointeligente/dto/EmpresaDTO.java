@@ -1,19 +1,12 @@
 package br.com.pontointeligente.dto;
 
-import br.com.pontointeligente.domain.Funcionario;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-public class EmpresaDTO implements Serializable {
-
+public class EmpresaDTO {
     private Long id;
 
     @NotEmpty(message = "O campo Razão Social é Obrigatório.")
@@ -27,6 +20,5 @@ public class EmpresaDTO implements Serializable {
 
     private Date dataAtualizacao;
 
-    private List<FuncionarioDTO> funcionarios;
-
+    List<FuncionarioDTO> funcionarioDTOS;
 }

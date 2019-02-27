@@ -1,23 +1,27 @@
 package br.com.pontointeligente.rest;
 
 import br.com.pontointeligente.dto.EmpresaDTO;
+import br.com.pontointeligente.dto.FormCadastroEmpresaDTO;
 import br.com.pontointeligente.response.Response;
 import br.com.pontointeligente.service.EmpresaService;
 import br.com.pontointeligente.service.FuncionarioService;
-import br.com.pontointeligente.service.impl.EmpresaServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/empresa")
 @CrossOrigin(origins = "*")
 public class EmpresaResource {
@@ -31,24 +35,32 @@ public class EmpresaResource {
         this.empresaService = empresaService;
         this.funcionarioService = funcionarioService;
     }
-
     @PostMapping
-    public Response<Response> cadastrarEmpresa(@Valid EmpresaDTO empresaDTO, BindingResult bindingResult) throws
+    public ResponseEntity<Response<FormCadastroEmpresaDTO>> cadastrarEmpresa(@Valid @RequestBody FormCadastroEmpresaDTO formCadastroEmpresaDTO, BindingResult bindingResult) throws
             NoSuchAlgorithmException {
-
-        this.logger.info("Iniciando o cadastro da empresa "+empresaDTO.getCnpj());
-        Response<EmpresaDTO> responseEmpresaDTO = new Response<>();
-
+        this.logger.info("Iniciando o cadastro da empresa "+formCadastroEmpresaDTO.getCnpj());
+        Response<FormCadastroEmpresaDTO> responseEmpresaDTO = new Response<>();
         this.logger.info("Validando os dados para o cadastro.");
-        isValid(empresaDTO);
-        return new Response<>();
+        bindingResult = this.empresaService.isValidEmpresa(formCadastroEmpresaDTO,bindingResult);
+        if(bindingResult.hasErrors()){
+            this.logger.info("Erro validado "+formCadastroEmpresaDTO.getCnpj());
+            bindingResult.getAllErrors().forEach(error -> responseEmpresaDTO.getErros().add(error.getDefaultMessage()));
+            return ResponseEntity.badRequest().body(responseEmpresaDTO);
+        }
+        this.empresaService.cadastrarEmpresa(formCadastroEmpresaDTO);
+        return ResponseEntity.ok(responseEmpresaDTO);
     }
 
-    private void isValid(EmpresaDTO empresaDTO) {
-        this.empresaService.isEmpresaCadastrada(empresaDTO.getCnpj());
-        // TODO - LEMBRAR DE VER COMO SERA A REGRA DE CADASTRAMENTO DE FUNCIONARIO NO CADASTRO DA EMPRESA
-        this.funcionarioService.isEmailCadastrado(empresaDTO.getFuncionarios().get(0).getEmail());
-        this.funcionarioService.isFuncionarioCadastrado(empresaDTO.getFuncionarios().get(0).getCpf());
+    @GetMapping
+    public ResponseEntity<Response<EmpresaDTO>> listarEmpresa() throws
+            NoSuchAlgorithmException {
+        this.logger.info("Iniciando a listagem de empresa ");
+
+        Response<EmpresaDTO> empresaDTOResponse = new Response<>();
+        List<EmpresaDTO> empresaDTOS = this.empresaService.buscarEmpresa();
+        empresaDTOResponse.setDatas(empresaDTOS);
+        return ResponseEntity.ok(empresaDTOResponse);
     }
+
 
 }
