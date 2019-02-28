@@ -26,6 +26,12 @@ public interface EmpresaService {
      */
     EmpresaDTO buscarEmpresaPorCodigo(Long id);
 
+    /**
+     * O método e responsável por listar todas as empresas
+     * cadastradas na base de dados.
+     *
+     * @return
+     */
     List<EmpresaDTO> buscarEmpresa();
 
     /**

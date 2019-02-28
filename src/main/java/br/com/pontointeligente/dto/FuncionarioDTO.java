@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -37,12 +38,14 @@ public class FuncionarioDTO implements Serializable {
 
     private Float qtdHorasAlmoco;
 
+    @NotBlank(message = "O campo perfil é obrigatório.")
     private Perfil perfil;
 
     private Date dataCriacao;
 
     private Date dataAtualizacao;
 
+    @NotBlank(message = "O campo empresa é obrigatório.")
     private EmpresaDTO empresa;
 
     private List<Lancamento> lancamentos;

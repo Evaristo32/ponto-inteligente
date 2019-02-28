@@ -25,7 +25,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_empresa",schema = "ponto")
-//@ToString
 public class Empresa implements Serializable {
 
     @Id
@@ -37,7 +36,7 @@ public class Empresa implements Serializable {
 
     @Getter
     @Setter
-    @Column(name = "razao_social", length = 20, nullable = false)
+    @Column(name = "razao_social", nullable = false)
     private String razaoSocial;
 
     @Getter

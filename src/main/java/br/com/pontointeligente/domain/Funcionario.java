@@ -39,12 +39,12 @@ public class Funcionario implements Serializable {
 
     @Getter
     @Setter
-    @Column(name = "nome", length = 20, nullable = false)
+    @Column(name = "nome", length = 100, nullable = false)
     private String nome;
 
     @Getter
     @Setter
-    @Column(name = "email", length = 50, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Getter
@@ -59,17 +59,17 @@ public class Funcionario implements Serializable {
 
     @Getter
     @Setter
-    @Column(name = "valor_Hora", length = 20)
+    @Column(name = "valor_Hora")
     private BigDecimal valorHora;
 
     @Getter
     @Setter
-    @Column(name = "qtd_Hora_Trabalhadas_Dia", length = 20)
+    @Column(name = "qtd_Hora_Trabalhadas_Dia")
     private Float qtdHorasTrabalhadasDia;
 
     @Getter
     @Setter
-    @Column(name = "qtd_Hora_Almoco", length = 20)
+    @Column(name = "qtd_Hora_Almoco")
     private Float qtdHorasAlmoco;
 
     @Getter

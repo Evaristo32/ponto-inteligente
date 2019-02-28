@@ -4,6 +4,7 @@ import br.com.pontointeligente.domain.Empresa;
 import br.com.pontointeligente.domain.Funcionario;
 import br.com.pontointeligente.dto.EmpresaDTO;
 import br.com.pontointeligente.dto.FormCadastroEmpresaDTO;
+import br.com.pontointeligente.dto.FuncionarioDTO;
 import br.com.pontointeligente.repository.EmpresaRepository;
 import br.com.pontointeligente.service.EmpresaService;
 import br.com.pontointeligente.service.FuncionarioService;
@@ -19,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +43,12 @@ public class EmpresaServiceImpl implements EmpresaService {
     public EmpresaDTO cadastrarEmpresa(FormCadastroEmpresaDTO formCadastroEmpresaDTO) {
         logger.info("Iniciando o cadastro da empresa do CNPJ  " + formCadastroEmpresaDTO.getCnpj());
         Empresa empresa = ModelMapperUtil.map(formCadastroEmpresaDTO, Empresa.class);
-        EmpresaDTO map = ModelMapperUtil.map(empresaRepository.save(empresa), EmpresaDTO.class);
+        EmpresaDTO map = ModelMapperUtil.map(this.empresaRepository.save(empresa), EmpresaDTO.class);
         Funcionario funcionario = ModelMapperUtil.map(formCadastroEmpresaDTO, Funcionario.class);
+        funcionario.setEmpresa(empresa);
 
+        logger.info("Iniciando o cadastro do funcionario ADMINISTRADOR da empresa  " + formCadastroEmpresaDTO.getCnpj());
+        map.setFuncionarios(Arrays.asList(this.funcionarioService.cadastrarFuncionario(funcionario)));
         return map;
     }
 

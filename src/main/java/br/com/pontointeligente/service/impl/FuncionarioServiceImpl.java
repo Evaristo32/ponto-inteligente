@@ -5,6 +5,7 @@ import br.com.pontointeligente.dto.EmpresaDTO;
 import br.com.pontointeligente.dto.FuncionarioDTO;
 import br.com.pontointeligente.repository.FuncionarioRepository;
 import br.com.pontointeligente.service.FuncionarioService;
+import br.com.pontointeligente.util.ModelMapperUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public FuncionarioDTO cadastrarFuncionario(Funcionario funcionario) {
-        Funcionario funcionarioCadastrado = this.funcionarioRepository.save(funcionario);
-        return null;
+        return ModelMapperUtil.map(this.funcionarioRepository.save(funcionario),FuncionarioDTO.class);
     }
 
     @Override

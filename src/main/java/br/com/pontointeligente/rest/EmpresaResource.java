@@ -31,6 +31,7 @@ public class EmpresaResource {
         this.empresaService = empresaService;
         this.funcionarioService = funcionarioService;
     }
+
     @RequestMapping(value = "/empresa", method = RequestMethod.POST)
     public ResponseEntity<Response<EmpresaDTO>> cadastrarEmpresa(@Valid @RequestBody FormCadastroEmpresaDTO formCadastroEmpresaDTO, BindingResult bindingResult) throws
             NoSuchAlgorithmException {
