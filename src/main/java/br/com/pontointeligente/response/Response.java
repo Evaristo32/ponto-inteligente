@@ -11,10 +11,6 @@ public class Response<T> {
 
     @Getter
     @Setter
-    private T data;
-
-    @Getter
-    @Setter
     private List<T> datas;
 
     private List<String> erros;

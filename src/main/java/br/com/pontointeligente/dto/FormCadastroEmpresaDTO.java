@@ -39,7 +39,8 @@ public class FormCadastroEmpresaDTO  {
     @Length(min = 1, max = 20, message = "O campo Razão Social deve conter entre 1 e 20 caractéres.")
     private String razaoSocial;
 
-    @NotEmpty(message = "O campo Razão Social é Obrigatório.")
+    @NotEmpty(message = "O campo Cnpj é Obrigatório.")
+    @Length(min = 14,max = 14, message = "O campo Cnpj deve conter 14 caracteres.")
     @CNPJ(message = "Cnpj invalido.")
     private String cnpj;
 

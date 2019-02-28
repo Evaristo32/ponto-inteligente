@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class EmpresaResource {
     private Logger logger = LoggerFactory.getLogger(EmpresaResource.class);
 
@@ -29,19 +31,25 @@ public class EmpresaResource {
         this.empresaService = empresaService;
         this.funcionarioService = funcionarioService;
     }
-    @RequestMapping(value = "/empresa/new", method = RequestMethod.POST)
-    public ResponseEntity<Response<FormCadastroEmpresaDTO>> cadastrarEmpresa(@Valid @RequestBody FormCadastroEmpresaDTO formCadastroEmpresaDTO, BindingResult bindingResult) throws
+    @RequestMapping(value = "/empresa", method = RequestMethod.POST)
+    public ResponseEntity<Response<EmpresaDTO>> cadastrarEmpresa(@Valid @RequestBody FormCadastroEmpresaDTO formCadastroEmpresaDTO, BindingResult bindingResult) throws
             NoSuchAlgorithmException {
+
         this.logger.info("Iniciando o cadastro da empresa "+formCadastroEmpresaDTO.getCnpj());
-        Response<FormCadastroEmpresaDTO> responseEmpresaDTO = new Response<>();
+        Response<EmpresaDTO> responseEmpresaDTO = new Response<>();
+
         this.logger.info("Validando os dados para o cadastro.");
         bindingResult = this.empresaService.isValidEmpresa(formCadastroEmpresaDTO,bindingResult);
+
         if(bindingResult.hasErrors()){
             this.logger.info("Erro validado "+formCadastroEmpresaDTO.getCnpj());
             bindingResult.getAllErrors().forEach(error -> responseEmpresaDTO.getErros().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(responseEmpresaDTO);
         }
-        this.empresaService.cadastrarEmpresa(formCadastroEmpresaDTO);
+        
+        EmpresaDTO empresaDTO = this.empresaService.cadastrarEmpresa(formCadastroEmpresaDTO);
+        List<EmpresaDTO> empresaDTOS = Arrays.asList(empresaDTO);
+        responseEmpresaDTO.setDatas(empresaDTOS);
         return ResponseEntity.ok(responseEmpresaDTO);
     }
 
