@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface EmpresaMapper {
+//@Mapper
+public interface EmpresaMapperService {
 
     Empresa empresaDtoToEmpresa(EmpresaDTO empresaDTO);
 

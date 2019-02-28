@@ -3,10 +3,11 @@ package br.com.pontointeligente.service.impl;
 import br.com.pontointeligente.domain.Empresa;
 import br.com.pontointeligente.dto.EmpresaDTO;
 import br.com.pontointeligente.dto.FormCadastroEmpresaDTO;
-import br.com.pontointeligente.mapper.EmpresaMapper;
 import br.com.pontointeligente.repository.EmpresaRepository;
 import br.com.pontointeligente.service.EmpresaService;
 import br.com.pontointeligente.service.FuncionarioService;
+import br.com.pontointeligente.util.SingletonModelMapper;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import javax.persistence.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+//import br.com.pontointeligente.mapper.EmpresaMapper;
 
 @Service
 public class EmpresaServiceImpl implements EmpresaService {
@@ -25,8 +27,8 @@ public class EmpresaServiceImpl implements EmpresaService {
    private Logger logger = LoggerFactory.getLogger(EmpresaServiceImpl.class);
 
    private EmpresaRepository empresaRepository;
-   private EmpresaMapper empresaMapper;
    private FuncionarioService funcionarioService;
+   private ModelMapper modelMapper = SingletonModelMapper.getInstacia();
 
    @Autowired
    public EmpresaServiceImpl(EmpresaRepository empresaRepository,FuncionarioService funcionarioService){
@@ -41,7 +43,7 @@ public class EmpresaServiceImpl implements EmpresaService {
       Empresa empresa = new Empresa();
       empresa.setRazaoSocial(formCadastroEmpresaDTO.getRazaoSocial());
       empresa.setCnpj(formCadastroEmpresaDTO.getCnpj());
-      return empresaMapper.empresaToEmpresaDto(empresaRepository.save(empresa));
+      return modelMapper.map(empresaRepository.save(empresa),EmpresaDTO.class);
    }
 
    @Override
@@ -49,7 +51,7 @@ public class EmpresaServiceImpl implements EmpresaService {
       logger.info("Iniciando a consulta da empresa com id  "+ id );
       Optional<Empresa> empresaConsultada = empresaRepository.findById(id);
       if(empresaConsultada.isPresent()){
-         return empresaMapper.empresaToEmpresaDto(empresaConsultada.get());
+         return modelMapper.map(empresaConsultada.get(),EmpresaDTO.class);
       }
 
       return null;
@@ -61,7 +63,8 @@ public class EmpresaServiceImpl implements EmpresaService {
       if (allEmpresa.isEmpty()){
          return  new ArrayList<>();
       }
-      return empresaMapper.empresaToListaEmpresaDto(allEmpresa);
+//      return empresaMapper.empresaToListaEmpresaDto(allEmpresa);
+   return null;
    }
 
    @Override
@@ -72,7 +75,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 
    @Override
    public EmpresaDTO alterarEmpresa(Empresa empresa) {
-      return empresaMapper.empresaToEmpresaDto(empresaRepository.save(empresa));
+//      return empresaMapper.empresaToEmpresaDto(empresaRepository.save(empresa));
+      return null;
    }
 
    @Override

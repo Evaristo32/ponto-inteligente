@@ -10,20 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/empresa")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class EmpresaResource {
     private Logger logger = LoggerFactory.getLogger(EmpresaResource.class);
 
@@ -35,7 +29,7 @@ public class EmpresaResource {
         this.empresaService = empresaService;
         this.funcionarioService = funcionarioService;
     }
-    @PostMapping
+    @RequestMapping(value = "/empresa/new", method = RequestMethod.POST)
     public ResponseEntity<Response<FormCadastroEmpresaDTO>> cadastrarEmpresa(@Valid @RequestBody FormCadastroEmpresaDTO formCadastroEmpresaDTO, BindingResult bindingResult) throws
             NoSuchAlgorithmException {
         this.logger.info("Iniciando o cadastro da empresa "+formCadastroEmpresaDTO.getCnpj());
@@ -51,7 +45,7 @@ public class EmpresaResource {
         return ResponseEntity.ok(responseEmpresaDTO);
     }
 
-    @GetMapping
+    @RequestMapping(value = "/empresa", method = RequestMethod.GET)
     public ResponseEntity<Response<EmpresaDTO>> listarEmpresa() throws
             NoSuchAlgorithmException {
         this.logger.info("Iniciando a listagem de empresa ");

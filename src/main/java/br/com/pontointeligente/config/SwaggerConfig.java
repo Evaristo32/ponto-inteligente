@@ -1,4 +1,4 @@
-package br.com.pontointeligente.swagger.config;
+package br.com.pontointeligente.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

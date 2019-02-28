@@ -16,7 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class FormCadastroEmpresaDTO implements Serializable {
+public class FormCadastroEmpresaDTO  {
 
     private Long id;
 
