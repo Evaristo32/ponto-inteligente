@@ -26,7 +26,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "tb_lancamento",schema = "ponto")
-//@ToString
 public class Lancamento implements Serializable {
 
     @Id

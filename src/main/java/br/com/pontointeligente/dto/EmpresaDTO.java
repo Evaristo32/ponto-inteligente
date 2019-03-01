@@ -31,6 +31,4 @@ public class EmpresaDTO {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
 
-    @JsonIgnore
-    List<FuncionarioDTO> funcionarios;
 }

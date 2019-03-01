@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -38,16 +39,16 @@ public class FuncionarioDTO{
 
     private Float qtdHorasAlmoco;
 
-    @NotBlank(message = "O campo perfil é obrigatório.")
-    private Perfil perfil;
+    @NotNull(message = "O campo perfil é obrigatório.")
+    private PerfilDTO perfil;
 
     private Date dataCriacao;
 
     private Date dataAtualizacao;
 
-    @NotBlank(message = "O campo empresa é obrigatório.")
+    @NotNull(message = "O campo empresa é obrigatório.")
     private EmpresaDTO empresa;
 
-    private List<Lancamento> lancamentos;
+    private List<LancamentoDTO> lancamentos;
 
 }

@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -26,14 +28,22 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public FuncionarioDTO cadastrarFuncionario(Funcionario funcionario) {
-        return ModelMapperUtil.map(this.funcionarioRepository.save(funcionario),FuncionarioDTO.class);
+    public FuncionarioDTO cadastrarFuncionario(FuncionarioDTO funcionarioDTO) {
+        return ModelMapperUtil.map(this.funcionarioRepository.save(ModelMapperUtil.map(funcionarioDTO,Funcionario.class)),FuncionarioDTO.class);
     }
 
     @Override
-    public Optional<FuncionarioDTO> buscarFuncionarioPorCodigo(Long id) {
+    public FuncionarioDTO buscarFuncionarioPorCodigo(Long id) {
         Optional<Funcionario> funcionario = this.funcionarioRepository.findById(id);
-        return null;
+        if(funcionario.isPresent()){
+            return ModelMapperUtil.map(funcionario.get(),FuncionarioDTO.class);
+        }
+        return new FuncionarioDTO();
+    }
+
+    @Override
+    public List<FuncionarioDTO> buscarFuncionarios() {
+        return this.funcionarioRepository.findAll().stream().map(f -> ModelMapperUtil.map(f,FuncionarioDTO.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -42,8 +52,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public FuncionarioDTO alterarFuncionario(Funcionario funcionario) {
-        return null;
+    public FuncionarioDTO alterarFuncionario(FuncionarioDTO funcionarioDTO) {
+        return ModelMapperUtil.map(this.funcionarioRepository.save(ModelMapperUtil.map(funcionarioDTO,Funcionario.class)),FuncionarioDTO.class);
     }
 
     @Override

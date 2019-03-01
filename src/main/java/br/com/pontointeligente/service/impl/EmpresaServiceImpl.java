@@ -43,13 +43,13 @@ public class EmpresaServiceImpl implements EmpresaService {
     public EmpresaDTO cadastrarEmpresa(FormCadastroEmpresaDTO formCadastroEmpresaDTO) {
         logger.info("Iniciando o cadastro da empresa do CNPJ  " + formCadastroEmpresaDTO.getCnpj());
         Empresa empresa = ModelMapperUtil.map(formCadastroEmpresaDTO, Empresa.class);
-        EmpresaDTO map = ModelMapperUtil.map(this.empresaRepository.save(empresa), EmpresaDTO.class);
-        Funcionario funcionario = ModelMapperUtil.map(formCadastroEmpresaDTO, Funcionario.class);
-        funcionario.setEmpresa(empresa);
+        EmpresaDTO empresaDTO = ModelMapperUtil.map(this.empresaRepository.save(empresa), EmpresaDTO.class);
+        FuncionarioDTO funcionarioDTO = ModelMapperUtil.map(formCadastroEmpresaDTO, FuncionarioDTO.class);
+        funcionarioDTO.setEmpresa(empresaDTO);
 
         logger.info("Iniciando o cadastro do funcionario ADMINISTRADOR da empresa  " + formCadastroEmpresaDTO.getCnpj());
-        map.setFuncionarios(Arrays.asList(this.funcionarioService.cadastrarFuncionario(funcionario)));
-        return map;
+        this.funcionarioService.cadastrarFuncionario(funcionarioDTO);
+        return empresaDTO;
     }
 
     @Override

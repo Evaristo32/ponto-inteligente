@@ -28,7 +28,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_funcionario",schema = "ponto")
-//@ToString
 public class Funcionario implements Serializable {
 
     @Id

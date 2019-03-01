@@ -4,6 +4,7 @@ import br.com.pontointeligente.domain.Funcionario;
 import br.com.pontointeligente.dto.EmpresaDTO;
 import br.com.pontointeligente.dto.FuncionarioDTO;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface FuncionarioService {
@@ -11,10 +12,10 @@ public interface FuncionarioService {
     /**
      * O método é responsável por cadastrar um funcionario.
      *
-     * @param funcionario
+     * @param funcionarioDTO
      * @return
      */
-    FuncionarioDTO cadastrarFuncionario(Funcionario funcionario);
+    FuncionarioDTO cadastrarFuncionario(FuncionarioDTO funcionarioDTO);
 
     /**
      * O método é responsável por consultar um funcionario por id.
@@ -22,7 +23,9 @@ public interface FuncionarioService {
      * @param id
      * @return
      */
-    Optional<FuncionarioDTO> buscarFuncionarioPorCodigo(Long id);
+    FuncionarioDTO buscarFuncionarioPorCodigo(Long id);
+
+    List<FuncionarioDTO> buscarFuncionarios();
 
     /**
      * O método e responsável por deletar um funcionario pelo o id informado.
@@ -34,10 +37,10 @@ public interface FuncionarioService {
     /**
      * O método e responsável por alterar o funcionario informado.
      *
-     * @param funcionario
+     * @param funcionarioDTO
      * @return
      */
-    FuncionarioDTO alterarFuncionario(Funcionario funcionario);
+    FuncionarioDTO alterarFuncionario(FuncionarioDTO funcionarioDTO);
 
     /**
      * O método e responsável por validar se o Funcionário já se encontra
