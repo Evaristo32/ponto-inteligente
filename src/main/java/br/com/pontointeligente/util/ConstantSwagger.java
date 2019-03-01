@@ -1,4 +1,4 @@
-package br.com.pontointeligente.config;
+package br.com.pontointeligente.util;
 
 public abstract class ConstantSwagger {
 
