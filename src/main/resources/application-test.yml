@@ -16,7 +16,7 @@ spring:
     database: h2
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate.show_sql: true
       hibernate.use_sql_comments: true
