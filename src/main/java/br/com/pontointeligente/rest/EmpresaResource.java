@@ -31,7 +31,7 @@ public class EmpresaResource {
         this.funcionarioService = funcionarioService;
     }
 
-    @RequestMapping(value = "/empresa", method = RequestMethod.POST)
+    @RequestMapping(value = "/empresa", method = RequestMethod.POST, produces="application/json", consumes="application/json")
     public ResponseEntity<Response<EmpresaDTO>> createEmpresa(@Valid @RequestBody FormCadastroEmpresaDTO formCadastroEmpresaDTO, BindingResult bindingResult) throws
             NoSuchAlgorithmException {
 
@@ -53,7 +53,7 @@ public class EmpresaResource {
         return ResponseEntity.ok(responseEmpresaDTO);
     }
 
-    @RequestMapping(value = "/empresa", method = RequestMethod.GET)
+    @RequestMapping(value = "/empresa", method = RequestMethod.GET, produces="application/json")
     public ResponseEntity<Response<EmpresaDTO>> findAllEmpresas() throws
             NoSuchAlgorithmException {
         this.logger.info("Iniciando a listagem de empresa ");
@@ -64,7 +64,7 @@ public class EmpresaResource {
         return ResponseEntity.ok(empresaDTOResponse);
     }
 
-    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.GET, produces="application/json")
     public ResponseEntity<Response<EmpresaDTO>> findByIdEmpresa(@PathVariable("id") Long id) throws
             NoSuchAlgorithmException {
         this.logger.info("Iniciando a listagem de empresa ");
@@ -73,7 +73,7 @@ public class EmpresaResource {
         return ResponseEntity.ok(empresaDTOResponse);
     }
 
-    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.DELETE,produces="application/json")
     public ResponseEntity<Response<EmpresaDTO>> deleteByIdEmpresa(@PathVariable("id") Long id) throws
             NoSuchAlgorithmException {
         this.logger.info("Iniciando a exclusão da empresa ");

@@ -1,5 +1,6 @@
 package br.com.pontointeligente.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -30,5 +31,6 @@ public class EmpresaDTO {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
 
+    @JsonIgnore
     List<FuncionarioDTO> funcionarios;
 }

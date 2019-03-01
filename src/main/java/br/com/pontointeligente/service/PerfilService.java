@@ -3,6 +3,7 @@ package br.com.pontointeligente.service;
 import br.com.pontointeligente.domain.Perfil;
 import br.com.pontointeligente.dto.PerfilDTO;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PerfilService {
@@ -10,10 +11,10 @@ public interface PerfilService {
     /**
      * O método é responsável por cadastrar uma perfil.
      *
-     * @param perfil
+     * @param perfilDTO
      * @return
      */
-    PerfilDTO cadastrarPerfil(Perfil perfil);
+    PerfilDTO cadastrarPerfil(PerfilDTO perfilDTO);
 
     /**
      * O método é responsável por consultar uma perfil por id.
@@ -21,7 +22,9 @@ public interface PerfilService {
      * @param id
      * @return
      */
-    Optional<PerfilDTO> buscarPerfilPorCodigo(Long id);
+     PerfilDTO buscarPerfilPorCodigo(Long id);
+
+    List<PerfilDTO> buscarPerfis();
 
     /**
      * O método e responsável por deletar uma perfil pelo o id informado.
@@ -33,9 +36,9 @@ public interface PerfilService {
     /**
      * O método e responsável por alterar o perfil informada.
      *
-     * @param perfil
+     * @param perfilDTO
      * @return
      */
-    PerfilDTO alterarPerfil(Perfil perfil);
+    PerfilDTO alterarPerfil(PerfilDTO perfilDTO);
 
 }

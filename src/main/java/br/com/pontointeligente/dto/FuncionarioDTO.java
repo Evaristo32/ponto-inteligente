@@ -15,7 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class FuncionarioDTO implements Serializable {
+public class FuncionarioDTO{
 
     private Long id;
 

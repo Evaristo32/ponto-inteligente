@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class LancamentoDTO implements Serializable {
+public class LancamentoDTO {
 
     private Long id;
 
