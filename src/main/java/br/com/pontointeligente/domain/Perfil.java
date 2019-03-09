@@ -20,6 +20,7 @@ public class Perfil implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ponto.seq_perfil")
     @SequenceGenerator(name = "ponto.seq_perfil", sequenceName = "ponto.seq_perfil", allocationSize = 1)
     @Getter
+    @Setter
     private Long id;
 
     @Getter

@@ -8,14 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -30,19 +27,36 @@ public class LancamentoResource {
    }
 
    @RequestMapping(value = "/lancamento", method = RequestMethod.POST)
-   public ResponseEntity<Response<LancamentoDTO>> cadastrarEmpresa(@Valid @RequestBody LancamentoDTO lancamentoDTO, BindingResult bindingResult) throws
+   public ResponseEntity<Response<LancamentoDTO>> cadastrarLancamento(@Valid @RequestBody LancamentoDTO lancamentoDTO, BindingResult bindingResult) throws
            NoSuchAlgorithmException {
       this.logger.info("Iniciando o cadastro do lancamento "+lancamentoDTO.getDescricaoLancamento());
       Response<LancamentoDTO> response = new Response<>();
       return ResponseEntity.ok(response);
    }
 
-
    @RequestMapping(value = "/lancamento", method = RequestMethod.GET)
-   public ResponseEntity<Response<LancamentoDTO>> listarEmpresa() throws
+   public ResponseEntity<Response<LancamentoDTO>> getAllLancamento() throws
            NoSuchAlgorithmException {
       this.logger.info("Iniciando a listagem dos lancamento ");
       Response<LancamentoDTO> response = new Response<>();
+      return ResponseEntity.ok(response);
+   }
+
+   @RequestMapping(value = "/lancamento/{id}", method = RequestMethod.GET, produces="application/json")
+   public ResponseEntity<Response<LancamentoDTO>> findByIdLancamento(@PathVariable("id") Long id) throws
+           NoSuchAlgorithmException {
+      this.logger.info("Iniciando a listagem do lancamento ");
+      Response<LancamentoDTO> response = new Response<>();
+      response.setDatas(Arrays.asList(this.lancamentoService.buscarLancamentoPorCodigo(id).get()));
+      return ResponseEntity.ok(response);
+   }
+
+   @RequestMapping(value = "/lancamento/{id}", method = RequestMethod.DELETE,produces="application/json")
+   public ResponseEntity<Response<LancamentoDTO>> deleteByIdLancamento(@PathVariable("id") Long id) throws
+           NoSuchAlgorithmException {
+      this.logger.info("Iniciando a exclusão dolancamento ");
+      Response<LancamentoDTO> response = new Response<>();
+      this.lancamentoService.deleteLancamentoPorID(id);
       return ResponseEntity.ok(response);
    }
 

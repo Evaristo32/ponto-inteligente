@@ -32,6 +32,7 @@ public class Lancamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ponto.seq_lancamento")
     @SequenceGenerator(name = "ponto.seq_lancamento", sequenceName = "ponto.seq_lancamento", allocationSize = 1)
     @Getter
+    @Setter
     private Long id;
 
     @Getter
