@@ -34,6 +34,7 @@ public class Funcionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ponto.seq_funcionario")
     @SequenceGenerator(name = "ponto.seq_funcionario", sequenceName = "ponto.seq_funcionario", allocationSize = 1)
     @Getter
+    @Setter
     private Long id;
 
     @Getter

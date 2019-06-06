@@ -10,7 +10,7 @@ spring:
     livereload:
       enabled: false # we use gulp + BrowserSync for livereload
   datasource:
-    url: jdbc:postgresql://localhost:5435/ponto
+    url: jdbc:postgresql://localhost:5432/ponto
     username: ponto
     password: ponto
     driver-class-name: org.postgresql.Driver
@@ -29,4 +29,3 @@ spring:
           use_jdbc_metadata_defaults: false
   flyway:
     enabled: true
-

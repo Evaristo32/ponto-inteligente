@@ -29,7 +29,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public FuncionarioDTO cadastrarFuncionario(FuncionarioDTO funcionarioDTO) {
-        return ModelMapperUtil.map(this.funcionarioRepository.save(ModelMapperUtil.map(funcionarioDTO,Funcionario.class)),FuncionarioDTO.class);
+        Funcionario funcionario = this.funcionarioRepository.save(ModelMapperUtil.map(funcionarioDTO, Funcionario.class));
+        return ModelMapperUtil.map(funcionario,FuncionarioDTO.class);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         if(funcionario.isPresent()){
             return ModelMapperUtil.map(funcionario.get(),FuncionarioDTO.class);
         }
-        return new FuncionarioDTO();
+        return null;
     }
 
     @Override
